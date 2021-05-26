@@ -1,0 +1,9 @@
+.header {
+    grid-area: h;
+    background-color: azure;
+}
+.header_icon span{
+    padding: 10px 10px;
+    font-size: 30px;
+    background-color: coral;
+}

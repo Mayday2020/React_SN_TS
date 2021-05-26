@@ -1,0 +1,15 @@
+.nav {
+    grid-area: n;
+    background-color: cadetblue;
+}
+.item{
+    list-style-type: none;
+}
+.item.active a {
+    color: #ffbeaa;
+    font-weight: bold;
+}
+.item a {
+    color: #fff;
+    text-decoration: none;
+}

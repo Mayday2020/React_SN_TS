@@ -1,0 +1,10 @@
+.content {
+    grid-area: c;
+    background-color: #ffbeaa;
+}
+.content_image {
+    font-size: 30px;
+    text-align: center;
+    padding: 15px;
+    background-color: coral;
+}
