@@ -5,6 +5,14 @@
     align-items: center;
 
 }
+.item a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #599496;
+}
+.likesCount {
+    color: #599496;
+}
 .user_image {
     background-color: coral;
     padding: 10px;
