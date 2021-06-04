@@ -11,23 +11,24 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.dialogsItems {
-
-}
-
 .dialog {
     background-color: azure;
-    color: cadetblue;
     padding: 10px;
     margin: 5px;
     border-radius: 5px;
 }
+
+.dialog a {
+    text-decoration: none;
+    color: cadetblue;
+}
+
 .active {
     background-color: cadetblue;
-    color: azure;
 }
-.messages {
 
+.active a {
+    color: azure;
 }
 
 .message {
