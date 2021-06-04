@@ -5,3 +5,34 @@
     padding: 15px;
     background-color: #ff7f50;
 }
+
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogsItems {
+
+}
+
+.dialog {
+    background-color: azure;
+    color: cadetblue;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+.active {
+    background-color: cadetblue;
+    color: azure;
+}
+.messages {
+
+}
+
+.message {
+    background-color: #ffffff;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
