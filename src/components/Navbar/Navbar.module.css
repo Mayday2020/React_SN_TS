@@ -5,11 +5,14 @@
 .item{
     list-style-type: none;
 }
-.item.active a {
+.item a.active {
     color: #ffbeaa;
-    font-weight: bold;
 }
 .item a {
     color: #fff;
+    font-weight: bold;
     text-decoration: none;
+}
+.item a:hover {
+    color: #ffe3d8;
 }

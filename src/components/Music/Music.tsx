@@ -5,7 +5,6 @@ const Music = () => {
     return (
         <main>
             <div className={s.content_image}>Music Image</div>
-
         </main>
     )
 }
