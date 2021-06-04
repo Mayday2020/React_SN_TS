@@ -1,7 +1,7 @@
 import React from "react";
 import s from './Dialogs.module.css';
 
-const Dialogs = (props: any) => {
+const Dialogs = () => {
     return (
         <main>
             <div className={s.content_image}>Dialogs Image</div>
