@@ -2,32 +2,43 @@ import React from "react";
 import s from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 
+type MessageType = {
+    message: string
+}
+type DialogItemType = {
+    id: number
+    name: string
+}
+
+const DialogItem = (props: DialogItemType) => {
+    let path = `/dialogs/${props.id}`;
+    return (
+        <div className={s.dialog /*+ ' ' + s.active*/}>
+            <NavLink to={path}>{props.name}</NavLink>
+        </div>
+    )
+}
+const Message = (props: MessageType) => {
+    return (
+        <div className={s.message}>{props.message}</div>
+    )
+}
 const Dialogs = () => {
     return (
         <main>
             <div className={s.content_image}>Dialogs Image</div>
             <div className={s.dialogs}>
                 <div className={s.dialogsItems}>
-                    <div className={s.dialog}>
-                        <NavLink to={'/dialogs/1'}>Alex</NavLink>
-                    </div>
-                    <div className={s.dialog + ' ' + s.active}>
-                        <NavLink to={'/dialogs/2'}>Bob</NavLink>
-                    </div>
-                    <div className={s.dialog}>
-                        <NavLink to={'/dialogs/3'}>Ashley</NavLink>
-                    </div>
-                    <div className={s.dialog}>
-                        <NavLink to={'/dialogs/4'}>Victory</NavLink>
-                    </div>
-                    <div className={s.dialog}>
-                        <NavLink to={'/dialogs/5'}>Helen</NavLink>
-                    </div>
+                    <DialogItem name={'Bob'} id={1}/>
+                    <DialogItem name={'Alex'} id={2}/>
+                    <DialogItem name={'Ashley'} id={3}/>
+                    <DialogItem name={'Victory'} id={4}/>
+                    <DialogItem name={'Helen'} id={5}/>
                 </div>
                 <div className={s.messages}>
-                    <div className={s.message}>Is that u, Alex Clare?</div>
-                    <div className={s.message}>Boooob?! Do somethink!!!</div>
-                    <div className={s.message}>Not of your business</div>
+                    <Message message={'Is that u, Alex Clare?'}/>
+                    <Message message={'Boooob?! Do somethink!!!'}/>
+                    <Message message={'Not of your business'}/>
                 </div>
             </div>
         </main>
