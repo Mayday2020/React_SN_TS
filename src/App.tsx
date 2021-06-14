@@ -9,7 +9,7 @@ import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 
-const App = () => {
+const App = (props: any) => {
     return (
 
         <BrowserRouter>
@@ -17,11 +17,11 @@ const App = () => {
                 <Header/>
                 <Navbar/>
                 <div className='content'>
-                    <Route path={'/dialogs'} component={Dialogs}/>
-                    <Route path={'/profile'} component={Profile}/>
-                    <Route path={'/news'} component={News}/>
-                    <Route path={'/settings'} component={Settings}/>
-                    <Route path={'/music'} component={Music}/>
+                    <Route path={'/dialogs'} render={ () => <Dialogs />} />
+                    <Route path={'/profile'} render={ () => <Profile />} />
+                    <Route path={'/news'} render={ () => <News />} />
+                    <Route path={'/settings'} render={ () => <Settings />} />
+                    <Route path={'/music'} render={ () => <Music />} />
                 </div>
             </div>
         </BrowserRouter>
