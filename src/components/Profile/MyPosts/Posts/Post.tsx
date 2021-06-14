@@ -6,7 +6,7 @@ type MessageType = {
     message: string,
     likesCount: number
 };
-const Post: React.FC<MessageType> = (props) => {
+const Post: React.FC<MessageType> = (props: MessageType) => {
     return (
         <div className={s.item}>
             <div className={s.user_image}> ava </div>
