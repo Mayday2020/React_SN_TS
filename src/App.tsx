@@ -8,7 +8,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
-import {StateType} from "./index";
+import {StateType} from "./Redux/state";
 
 type PropsStateType = {
     state: StateType
@@ -20,8 +20,8 @@ const App: React.FC<PropsStateType> = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className='content'>
-                    <Route path={'/dialogs'} render={ () => <Dialogs dialogs={props.state.dialogs} />} />
-                    <Route path={'/profile'} render={ () => <Profile posts={props.state.posts}/>} />
+                    <Route path={'/dialogs'} render={ () => <Dialogs dialogs={props.state.messagesPage} />} />
+                    <Route path={'/profile'} render={ () => <Profile posts={props.state.profilePage.posts}/>} />
                     <Route path={'/news'} render={ () => <News />} />
                     <Route path={'/settings'} render={ () => <Settings />} />
                     <Route path={'/music'} render={ () => <Music />} />

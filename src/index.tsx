@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import state from './Redux/state'
+
+/*
 import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessageType} from "./components/Dialogs/Message/Message";
+*/
 
-export type PostType = {
+/*export type PostType = {
     id: number,
     message: string,
     likesCount: number
@@ -37,8 +41,8 @@ let state = {
             {id: 1, message: 'Not of your business'}
         ]
     }
+}*/
 
-}
 ReactDOM.render(
   <React.StrictMode>
     <App state={state}/>

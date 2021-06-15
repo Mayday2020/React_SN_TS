@@ -5,12 +5,12 @@ import Message, {MessageType} from "./Message/Message";
 
 type DialogsPropsType = {
     dialogs: {
-        users: DialogItemType[],
+        dialogs: DialogItemType[],
         messages: MessageType[]
     }
 }
 const Dialogs: React.FC<DialogsPropsType> = (props: DialogsPropsType) => {
-    let dialogsElements = props.dialogs.users.map(d => <DialogItem id={d.id} name={d.name}/>)
+    let dialogsElements = props.dialogs.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
     let messagesElements = props.dialogs.messages.map(m => <Message id={m.id} message={m.message}/>)
     return (
         <main>
