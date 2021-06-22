@@ -1,23 +1,31 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Posts/Post";
-import {ProfilePropsType} from "../Profile";
+import {ProfilePageType} from "../../../Redux/state";
 
-const MyPosts: React.FC<ProfilePropsType> = (props: ProfilePropsType) => {
+type MyPostsPropsType = {
+    profilePage: ProfilePageType,
+    addPost: (postMessage: string) => void
+    changeNewText: (newText: string) => void
+}
+const MyPosts: React.FC<MyPostsPropsType> = (props: MyPostsPropsType) => {
 
-    let postMessageRef = React.createRef<HTMLTextAreaElement>()
     let addPost = () => {
-        debugger
-        if (postMessageRef.current){
-            props.addPost(postMessageRef.current.value)
-        }
+        props.addPost(props.profilePage.newPostText)
     }
-    let postsElements = props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = props.profilePage.posts.map(p => <Post key={p.id}
+                                                   id={p.id}
+                                                   message={p.message}
+                                                   likesCount={p.likesCount}/>)
+
     return (
         <div className={s.item}>
             <div className={s.newPost}>
                 <div>
-                    <textarea ref={postMessageRef} ></textarea>
+                    <textarea value={props.profilePage.newPostText}
+                    onChange={ (e) => {
+                        props.changeNewText(e.currentTarget.value)
+                    } }/>
                 </div>
                 <button onClick={addPost}>Add post</button>
             </div>

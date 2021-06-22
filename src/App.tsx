@@ -10,9 +10,11 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import {RootStateType} from "./Redux/state";
 
+
 type PropsStateType = {
     state: RootStateType
     addPost: (postText: string) => void
+    changeNewText: (newText: string) => void
 }
 const App: React.FC<PropsStateType> = (props: PropsStateType) => {
     return (
@@ -21,14 +23,16 @@ const App: React.FC<PropsStateType> = (props: PropsStateType) => {
                 <Header/>
                 <Navbar/>
                 <div className='content'>
-                    <Route path={'/dialogs'} render={ () =>
-                        <Dialogs dialogs={props.state.dialogsPage} />} />
-                    <Route path={'/profile'} render={ () =>
-                        <Profile posts={props.state.profilePage.posts}
-                                 addPost={props.addPost}/>} />
-                    <Route path={'/news'} render={ () => <News />} />
-                    <Route path={'/settings'} render={ () => <Settings />} />
-                    <Route path={'/music'} render={ () => <Music />} />
+                    <Route path={'/dialogs'} render={() =>
+                        <Dialogs dialogs={props.state.dialogsPage}/>}/>
+                    <Route path={'/profile'} render={() =>
+                        <Profile
+                            profilePage={props.state.profilePage}
+                            addPost={props.addPost}
+                            changeNewText={props.changeNewText}/>}/>
+                    <Route path={'/news'} render={() => <News/>}/>
+                    <Route path={'/settings'} render={() => <Settings/>}/>
+                    <Route path={'/music'} render={() => <Music/>}/>
                 </div>
             </div>
         </BrowserRouter>
