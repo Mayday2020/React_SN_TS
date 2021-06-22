@@ -8,20 +8,24 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
-import {StateType} from "./Redux/state";
+import {RootStateType} from "./Redux/state";
 
 type PropsStateType = {
-    state: StateType
+    state: RootStateType
+    addPost: (postText: string) => void
 }
-const App: React.FC<PropsStateType> = (props) => {
+const App: React.FC<PropsStateType> = (props: PropsStateType) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper-content">
                 <Header/>
                 <Navbar/>
                 <div className='content'>
-                    <Route path={'/dialogs'} render={ () => <Dialogs dialogs={props.state.messagesPage} />} />
-                    <Route path={'/profile'} render={ () => <Profile posts={props.state.profilePage.posts}/>} />
+                    <Route path={'/dialogs'} render={ () =>
+                        <Dialogs dialogs={props.state.dialogsPage} />} />
+                    <Route path={'/profile'} render={ () =>
+                        <Profile posts={props.state.profilePage.posts}
+                                 addPost={props.addPost}/>} />
                     <Route path={'/news'} render={ () => <News />} />
                     <Route path={'/settings'} render={ () => <Settings />} />
                     <Route path={'/music'} render={ () => <Music />} />

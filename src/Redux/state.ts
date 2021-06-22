@@ -1,16 +1,33 @@
-import {MessageType} from "../components/Dialogs/Message/Message";
-import {DialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
 
+export type MessageType = {
+    id: number
+    message: string
+}
+export type DialogItemType = {
+    id: number
+    name: string
+}
 export type PostType = {
     id: number,
     message: string,
     likesCount: number
 }
-export type StateType ={
-    profilePage: {posts: PostType[]}
-    messagesPage: {dialogs: DialogItemType[], messages: MessageType[]}
+type ProfilePageType = {
+    posts: PostType[]
 }
-let state = {
+type DialogPageType = {
+    dialogs: DialogItemType[]
+    messages: MessageType[]
+}
+type SidebarType = {}
+
+export type RootStateType ={
+    profilePage: ProfilePageType
+    dialogsPage: DialogPageType
+    sidebar: SidebarType
+}
+
+let state: RootStateType = {
     profilePage: {
         posts: [
             { id: 1, message: "Hi, how are you?", likesCount: 30 },
@@ -18,7 +35,7 @@ let state = {
             { id: 3, message: "Please, like this comment))", likesCount: 91 }
         ]
     },
-    messagesPage: {
+    dialogsPage: {
         dialogs: [
             {id: 1, name: 'Bob'},
             {id: 2, name: 'Alex'},
@@ -33,7 +50,16 @@ let state = {
             {id: 1, message: 'Not of your business'},
             {id: 1, message: 'Not of your business'}
         ]
-    }
+    },
+    sidebar: {}
 }
 
+export const addPost:(postText: string)=>void = (postText: string) => {
+    let newPost: PostType = {
+        id: new Date().getTime(),
+        message: postText,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(newPost)
+}
 export default state
