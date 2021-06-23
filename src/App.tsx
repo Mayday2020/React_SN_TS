@@ -13,7 +13,7 @@ import {RootStateType} from "./Redux/state";
 
 type PropsStateType = {
     state: RootStateType
-    addPost: (postText: string) => void
+    addPost: () => void
     changeNewText: (newText: string) => void
 }
 const App: React.FC<PropsStateType> = (props: PropsStateType) => {

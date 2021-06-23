@@ -5,19 +5,15 @@ import {ProfilePageType} from "../../../Redux/state";
 
 type MyPostsPropsType = {
     profilePage: ProfilePageType,
-    addPost: (postMessage: string) => void
+    addPost: () => void
     changeNewText: (newText: string) => void
 }
 const MyPosts: React.FC<MyPostsPropsType> = (props: MyPostsPropsType) => {
 
-    let addPost = () => {
-        props.addPost(props.profilePage.newPostText)
-    }
     let postsElements = props.profilePage.posts.map(p => <Post key={p.id}
                                                    id={p.id}
                                                    message={p.message}
                                                    likesCount={p.likesCount}/>)
-
     return (
         <div className={s.item}>
             <div className={s.newPost}>
@@ -27,7 +23,7 @@ const MyPosts: React.FC<MyPostsPropsType> = (props: MyPostsPropsType) => {
                         props.changeNewText(e.currentTarget.value)
                     } }/>
                 </div>
-                <button onClick={addPost}>Add post</button>
+                <button onClick={props.addPost}>Add post</button>
             </div>
             <div className={s.posts}>
                 Posts

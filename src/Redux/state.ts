@@ -1,4 +1,4 @@
-import {renderEntireTree} from "../render";
+import {renderTree} from "../index";
 
 export type MessageType = {
     id: number
@@ -56,7 +56,7 @@ let state: RootStateType = {
     sidebar: {}
 }
 
-export const addPost:(postText: string)=>void = (postText: string) => {
+export const addPost = () => {
     let newPost: PostType = {
         id: new Date().getTime(),
         message: state.profilePage.newPostText,
@@ -64,10 +64,11 @@ export const addPost:(postText: string)=>void = (postText: string) => {
     }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
-    renderEntireTree(state);
+    renderTree(state);
 }
 export const changeNewText:(newText: string)=>void = (newText: string) => {
     state.profilePage.newPostText = newText;
-    renderEntireTree(state);
+    renderTree(state);
 }
+
 export default state
