@@ -1,12 +1,11 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Posts/Post";
-import {ProfilePageType} from "../../../Redux/state";
+import {ActionsTypes, ProfilePageType} from "../../../Redux/state";
 
 type MyPostsPropsType = {
     profilePage: ProfilePageType,
-    addPost: () => void
-    changeNewText: (newText: string) => void
+    dispatch: (action: ActionsTypes)=> void
 }
 const MyPosts: React.FC<MyPostsPropsType> = (props: MyPostsPropsType) => {
 
@@ -14,16 +13,17 @@ const MyPosts: React.FC<MyPostsPropsType> = (props: MyPostsPropsType) => {
                                                    id={p.id}
                                                    message={p.message}
                                                    likesCount={p.likesCount}/>)
+
     return (
         <div className={s.item}>
             <div className={s.newPost}>
                 <div>
                     <textarea value={props.profilePage.newPostText}
                     onChange={ (e) => {
-                        props.changeNewText(e.currentTarget.value)
+                        props.dispatch({type: "UPDATE-NEW-POST-TEXT", message: e.currentTarget.value})
                     } }/>
                 </div>
-                <button onClick={props.addPost}>Add post</button>
+                <button onClick={()=>{props.dispatch({type: 'ADD-POST'})}}>Add post</button>
             </div>
             <div className={s.posts}>
                 Posts

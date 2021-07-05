@@ -1,4 +1,57 @@
 
+export type StoreType = {
+    _state: RootStateType
+    getState: ()=> RootStateType
+    addPost: ()=> void
+    changeNewText: (newText: string) => void
+    _callSubscriber: (state: RootStateType) => void
+    updateNewPostText: (newText: string) => void
+    subscribe: (observer: ((state: RootStateType)=>void)) => void
+    dispatch:(action: ActionsTypes) => void
+}
+export type MessageType = {
+    id: number
+    message: string
+}
+export type DialogItemType = {
+    id: number
+    name: string
+}
+export type PostType = {
+    id: number,
+    message: string,
+    likesCount: number
+}
+export type ProfilePageType = {
+    posts: PostType[]
+    newPostText: string
+}
+type DialogPageType = {
+    dialogs: DialogItemType[]
+    messages: MessageType[]
+}
+type SidebarType = {}
+export type RootStateType ={
+    profilePage: ProfilePageType
+    dialogsPage: DialogPageType
+    sidebar: SidebarType
+}
+export type DispatchPropsType = {
+    type: string
+    message: string
+}
+
+type AddPostActionType = {
+    type: "ADD-POST"
+    /*postText: string*/
+}
+type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    message: string
+}
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+
+
 export const store: StoreType = {
     _state: {
         profilePage: {
@@ -55,43 +108,22 @@ export const store: StoreType = {
     subscribe(observer){
         this._callSubscriber = observer;
         console.log('subscribe')
+    },
+    dispatch(action){  /*  action = {}  */
+        if(action.type === "ADD-POST"){
+            let newPost: PostType = {
+                id: new Date().getTime(),
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEW-POST-TEXT"){
+            this._state.profilePage.newPostText = action.message;
+            this._callSubscriber(this._state);
+        }
     }
-}
-export type StoreType = {
-    _state: RootStateType
-    getState: ()=> RootStateType
-    addPost: ()=> void
-    changeNewText: (newText: string)=> void
-    _callSubscriber: (state: RootStateType)=> void
-    updateNewPostText: (newText: string) => void
-    subscribe: (observer: ((state: RootStateType)=>void))=> void
-}
-export type MessageType = {
-    id: number
-    message: string
-}
-export type DialogItemType = {
-    id: number
-    name: string
-}
-export type PostType = {
-    id: number,
-    message: string,
-    likesCount: number
-}
-export type ProfilePageType = {
-    posts: PostType[]
-    newPostText: string
-}
-type DialogPageType = {
-    dialogs: DialogItemType[]
-    messages: MessageType[]
-}
-type SidebarType = {}
-export type RootStateType ={
-    profilePage: ProfilePageType
-    dialogsPage: DialogPageType
-    sidebar: SidebarType
 }
 
 export default store;
