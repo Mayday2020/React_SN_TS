@@ -41,16 +41,7 @@ export type DispatchPropsType = {
     message: string
 }
 
-type AddPostActionType = {
-    type: "ADD-POST"
-    /*postText: string*/
-}
-type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    message: string
-}
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType
-
+export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostActionCreator>
 
 export const store: StoreType = {
     _state: {
@@ -125,6 +116,16 @@ export const store: StoreType = {
         }
     }
 }
+
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+
+export const addPostActionCreator = (postText: string) => {
+    return {type: ADD_POST, postText: postText} as const
+};
+export const updateNewPostActionCreator = (text: string) => {
+    return {type: UPDATE_NEW_POST_TEXT, message: text} as const
+};
 
 export default store;
 /*window.store = store;*/
