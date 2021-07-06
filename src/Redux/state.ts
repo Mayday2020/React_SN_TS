@@ -29,6 +29,7 @@ export type ProfilePageType = {
 type DialogPageType = {
     dialogs: DialogItemType[]
     messages: MessageType[]
+    newMessageBody: string
 }
 type SidebarType = {}
 export type RootStateType ={
@@ -41,7 +42,10 @@ export type DispatchPropsType = {
     message: string
 }
 
-export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostActionCreator>
+export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof updateNewPostActionCreator> |
+    ReturnType<typeof updateNewMessageBodyCreator> |
+    ReturnType<typeof sendMessageCreator>
 
 export const store: StoreType = {
     _state: {
@@ -63,11 +67,12 @@ export const store: StoreType = {
             ],
             messages: [
                 {id: 1, message: 'Is that u, Alex Clare?'},
-                {id: 1, message: 'Boooob?! Do somethink!!!'},
-                {id: 1, message: 'Not of your business'},
-                {id: 1, message: 'Not of your business'},
-                {id: 1, message: 'Not of your business'}
-            ]
+                {id: 2, message: 'Boooob?! Do somethink!!!'},
+                {id: 3, message: 'Not of your business'},
+                {id: 4, message: 'Not of your business'},
+                {id: 5, message: 'Not of your business'}
+            ],
+            newMessageBody: ''
         },
         sidebar: {}
     },
@@ -101,7 +106,7 @@ export const store: StoreType = {
         console.log('subscribe')
     },
     dispatch(action){  /*  action = {}  */
-        if(action.type === "ADD-POST"){
+        if(action.type === ADD_POST){
             let newPost: PostType = {
                 id: new Date().getTime(),
                 message: this._state.profilePage.newPostText,
@@ -110,8 +115,16 @@ export const store: StoreType = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state);
-        } else if (action.type === "UPDATE-NEW-POST-TEXT"){
+        } else if (action.type === UPDATE_NEW_POST_TEXT){
             this._state.profilePage.newPostText = action.message;
+            this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._callSubscriber(this._state);
+        } else if (action.type === SEND_MESSAGE) {
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
+            this._state.dialogsPage.messages.push({id: 6, message: body})
             this._callSubscriber(this._state);
         }
     }
@@ -119,6 +132,8 @@ export const store: StoreType = {
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY"
+const SEND_MESSAGE = "SEND-MESSAGE"
 
 export const addPostActionCreator = (postText: string) => {
     return {type: ADD_POST, postText: postText} as const
@@ -126,6 +141,13 @@ export const addPostActionCreator = (postText: string) => {
 export const updateNewPostActionCreator = (text: string) => {
     return {type: UPDATE_NEW_POST_TEXT, message: text} as const
 };
+
+export const updateNewMessageBodyCreator = (body: string) => {
+    return {type: UPDATE_NEW_MESSAGE_BODY, body: body} as const
+}
+export const sendMessageCreator = (body: string) => {
+    return {type: SEND_MESSAGE, body: body} as const
+}
 
 export default store;
 /*window.store = store;*/
