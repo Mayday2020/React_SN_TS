@@ -8,7 +8,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
-import {ActionsTypes, RootStateType} from "./Redux/state";
+import {ActionsTypes, RootStateType} from "./Redux/store";
 
 
 type PropsStateType = {
