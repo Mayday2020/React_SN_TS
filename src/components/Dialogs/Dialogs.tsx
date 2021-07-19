@@ -5,7 +5,7 @@ import Message  from "./Message/Message";
 import {DialogItemType, MessageType} from "../../Redux/store";
 
 type DialogsPropsType = {
-    dialogs: {
+    dialogsPage: {
         dialogs: DialogItemType[],
         messages: MessageType[]
         newMessageBody: string
@@ -14,9 +14,9 @@ type DialogsPropsType = {
     sendMessage: (textMessage: string)=> void
 }
 const Dialogs: React.FC<DialogsPropsType> = (props: DialogsPropsType) => {
-    let dialogsElements = props.dialogs.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
-    let messagesElements = props.dialogs.messages.map(m => <Message id={m.id} message={m.message}/>)
-    let newMessageBody = props.dialogs.newMessageBody;
+    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
+    let messagesElements = props.dialogsPage.messages.map(m => <Message id={m.id} message={m.message}/>)
+    let newMessageBody = props.dialogsPage.newMessageBody;
 
     let onSendMessageClick = () => {
         props.sendMessage(newMessageBody)

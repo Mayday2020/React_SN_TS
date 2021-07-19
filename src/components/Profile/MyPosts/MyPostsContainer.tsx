@@ -1,5 +1,5 @@
 import React from "react";
-import {RootStateType, StoreType} from "../../../Redux/store";
+import {RootStateType} from "../../../Redux/store";
 import {addPostCreator, updateNewPostCreator} from "../../../Redux/profile_reducer"
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
@@ -14,7 +14,7 @@ let mapStateToProps = (state: RootStateType) => {
 let mapDispatchToProps = (dispatch: any) => {
     return {
         addPosts: ()=>{
-            dispatch(addPostCreator(store._state.profilePage.newPostText))
+            dispatch(addPostCreator())
         },
         onPostChange:(text: string)=>{
             let action = updateNewPostCreator(text)

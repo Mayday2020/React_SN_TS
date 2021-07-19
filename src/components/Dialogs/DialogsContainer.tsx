@@ -1,10 +1,8 @@
-import React from "react";
 
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../Redux/dialogs_reducer"
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/store";
-import {ActionCreator} from "redux";
 
 /*const DialogsContainer = () => {
     return (
@@ -33,11 +31,11 @@ let mapStateToProps = (state: RootStateType) => {
 }
 let mapDispatchToProps = (dispatch: any) => {
     return {
-        updateNewMessageBody: ()=>{
-            dispatch(sendMessageCreator())
+        updateNewMessageBody: (body: string)=>{
+            dispatch(updateNewMessageBodyCreator(body))
         },
         sendMessage: (body: string)=>{
-            dispatch(updateNewMessageBodyCreator(body))
+            dispatch(sendMessageCreator(body))
         }
     }
 }
