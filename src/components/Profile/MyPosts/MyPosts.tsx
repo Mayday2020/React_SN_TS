@@ -30,10 +30,14 @@ const MyPosts: React.FC<MyPostsPropsType> = (props: MyPostsPropsType) => {
         <div className={s.item}>
             <div className={s.newPost}>
                 <div>
-                    <textarea value={props.newPostText}
+                    <textarea className={s.myPostTextarea}
+                              value={props.newPostText}
+                              placeholder={'Enter your post'}
                     onChange={ newTextChangeHandler }/>
                 </div>
-                <button onClick={ addPost }>Add post</button>
+                <div>
+                    <button className={s.buttonAddPost} onClick={ addPost }>Add post</button>
+                </div>
             </div>
             <div className={s.posts}>
                 Posts

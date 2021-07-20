@@ -3,4 +3,17 @@
 }
 .newPost {
     padding: 10px;
+    display: flex;
+}
+.myPostTextarea {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid darkgray;
+    margin-right: 10px;
+    font-family: Verdana, sans-serif;
+}
+.buttonAddPost {
+    padding: 18px;
+    border-radius: 5px;
+    border: 1px solid darkgray;
 }

@@ -5,35 +5,44 @@
     padding: 15px;
     background-color: #ff7f50;
 }
-
 .dialogs {
     display: grid;
     grid-template-columns: 2fr 10fr;
 }
-
 .dialog {
     background-color: azure;
     padding: 10px;
     margin: 5px;
     border-radius: 5px;
 }
-
 .dialog a {
     text-decoration: none;
     color: cadetblue;
 }
-
 .active {
     background-color: cadetblue;
 }
-
 .active a {
     color: azure;
 }
-
 .message {
     background-color: #ffffff;
     padding: 10px;
     margin: 5px;
     border-radius: 5px;
+}
+.dialogsUI {
+    display: flex;
+}
+.dialogsTextarea {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid darkgray;
+    margin-right: 10px;
+    font-family: Verdana, sans-serif;
+}
+.buttonSendMessage {
+    padding: 18px;
+    border-radius: 5px;
+    border: 1px solid darkgray;
 }

@@ -2,6 +2,7 @@
 import profileReducer, {addPostCreator, updateNewPostCreator} from "./profile_reducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs_reducer";
 import sidebarReducer from "./sidebar_reducer";
+import {followAC, setUsersAC, unfollowAC} from "./users_reducer";
 
         //  TYPES
 
@@ -31,10 +32,27 @@ export type ProfilePageType = {
 
 export type SidebarType = {}            //  Sidebar
 
-export type RootStateType ={
+type LocationUserType = {
+    country: string,
+    city: string
+}           // Users
+export type UserType = {
+    id: number
+    photoUrl: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: LocationUserType
+}
+export type ArrayUsersType = {
+    users: UserType[]
+}
+
+export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
-    sidebar: SidebarType
+    sidebarPage: SidebarType
+    usersPage: ArrayUsersType
 }        //  State
 
 export type DispatchPropsType = {
@@ -59,6 +77,24 @@ export type ActionsTypes = ReturnType<typeof addPostCreator> |
     ReturnType<typeof updateNewPostCreator> |
     ReturnType<typeof updateNewMessageBodyCreator> |
     ReturnType<typeof sendMessageCreator>
+
+export type ActionUsers = ReturnType<typeof followAC> |
+    ReturnType<typeof unfollowAC> |
+    ReturnType<typeof setUsersAC>
+
+/*type FollowActionType = {
+    type: "FOLLOW"
+    userId: number
+}
+type UnfollowActionType = {
+    type: "UNFOLLOW"
+    userId: number
+}
+type SetUsersActionType = {
+    type: "SET-USERS"
+    users: UserType[]
+}*/
+/*export type ActionUsers = FollowActionType | UnfollowActionType | SetUsersActionType*/
 
         //  STORE
 
@@ -89,7 +125,14 @@ export const store: StoreType = {
             ],
             newMessageBody: ''
         },
-        sidebar: {}
+        sidebarPage: {},
+        usersPage: {
+            users: [
+                {id: 1, photoUrl: '', followed: true, fullName: 'Dmitry', status: 'Learning React', location: {country: 'Russia', city: 'Moscow'}},
+                {id: 2, photoUrl: '', followed: false, fullName: 'Daniel', status: 'Eating...', location: {country: 'Belarus', city: 'Minsk'}},
+                {id: 3, photoUrl: '', followed: true, fullName: 'Vlad', status: 'Sleeping...Zzz...zzz', location: {country: 'Ukrane', city: 'Kiev'}}
+            ]
+        }
     },
     getState(){
       return this._state
@@ -123,7 +166,7 @@ export const store: StoreType = {
     dispatch(action){  /*  action = {}  */
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._state.sidebarPage = sidebarReducer(this._state.sidebarPage, action)
 
         this._callSubscriber(this._state);
     }

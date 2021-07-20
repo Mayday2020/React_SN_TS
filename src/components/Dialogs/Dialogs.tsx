@@ -13,9 +13,10 @@ type DialogsPropsType = {
     updateNewMessageBody: (text: string)=> void,
     sendMessage: (textMessage: string)=> void
 }
+
 const Dialogs: React.FC<DialogsPropsType> = (props: DialogsPropsType) => {
-    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
-    let messagesElements = props.dialogsPage.messages.map(m => <Message id={m.id} message={m.message}/>)
+    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem id={d.id} key={d.id} name={d.name}/>)
+    let messagesElements = props.dialogsPage.messages.map(m => <Message id={m.id} key={m.id} message={m.message}/>)
     let newMessageBody = props.dialogsPage.newMessageBody;
 
     let onSendMessageClick = () => {
@@ -34,14 +35,15 @@ const Dialogs: React.FC<DialogsPropsType> = (props: DialogsPropsType) => {
                 </div>
                 <div className={s.messages}>
                     <div>{messagesElements}</div>
-                    <div>
+                    <div className={s.dialogsUI}>
                         <div>
-                            <textarea value={newMessageBody}
+                            <textarea className={s.dialogsTextarea}
+                                      value={newMessageBody}
                                       placeholder={'Enter your message'}
                                       onChange={onNewMessageChange} />
                         </div>
                         <div>
-                            <button onClick={onSendMessageClick}>Send</button>
+                            <button className={s.buttonSendMessage} onClick={onSendMessageClick}>Send</button>
                         </div>
                     </div>
                 </div>
