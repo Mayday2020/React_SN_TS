@@ -10,9 +10,6 @@ import Music from "./components/Music/Music";
 
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-/*type PropsStateType = {
-    store: StoreType
-}*/
 const App = () => {
     return (
         <BrowserRouter>

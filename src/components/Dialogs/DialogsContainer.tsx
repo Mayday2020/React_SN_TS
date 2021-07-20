@@ -4,26 +4,6 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/store";
 
-/*const DialogsContainer = () => {
-    return (
-        <StoreContext.Consumer>
-            {
-            store => {
-                let newMessageBody = store._state.dialogsPage.newMessageBody;
-                let onSendMessageClick = () => {
-                    store.dispatch(sendMessageCreator(newMessageBody))
-                }
-                let onNewMessageChange = (text: string) => {
-                    store.dispatch(updateNewMessageBodyCreator(text))
-                }
-                return <Dialogs dialogs={store.getState().dialogsPage}
-                                updateNewMessageBody={onNewMessageChange}
-                                sendMessage={onSendMessageClick}/>
-            }
-        }
-        </StoreContext.Consumer>
-    )
-}*/
 let mapStateToProps = (state: RootStateType) => {
     return {
         dialogsPage: state.dialogsPage

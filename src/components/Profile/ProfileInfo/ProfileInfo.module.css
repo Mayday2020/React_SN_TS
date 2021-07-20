@@ -1,4 +1,14 @@
 
 .profileInfo {
+    display: flex;
     padding: 10px;
+}
+.user_image {
+    align-self: flex-start;
+    background-color: coral;
+    padding: 15px 10px;
+    margin: 10px;
+    font-size: 22px;
+    border-radius: 50%;
+    color: #FFF;
 }
