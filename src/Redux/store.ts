@@ -82,20 +82,6 @@ export type ActionUsers = ReturnType<typeof followAC> |
     ReturnType<typeof unfollowAC> |
     ReturnType<typeof setUsersAC>
 
-/*type FollowActionType = {
-    type: "FOLLOW"
-    userId: number
-}
-type UnfollowActionType = {
-    type: "UNFOLLOW"
-    userId: number
-}
-type SetUsersActionType = {
-    type: "SET-USERS"
-    users: UserType[]
-}*/
-/*export type ActionUsers = FollowActionType | UnfollowActionType | SetUsersActionType*/
-
         //  STORE
 
 export const store: StoreType = {

@@ -1,10 +1,27 @@
-.user {
+.wrapper {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.content_image {
+    font-size: 30px;
+    text-align: center;
+    padding: 15px;
+    background-color: #ff7f50;
+}
+.user {
+    display: grid;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
     padding: 10px;
     margin: 10px;
+    background-color: #FFF;
+    border-radius: 5px;
+    width: 80%;
 }
 .avatar {
     background-color: coral;
+    width: 30px;
     padding: 10px;
     margin: 5px;
     font-size: 18px;
@@ -13,5 +30,7 @@
 }
 .userInfo {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: #a7a5a5;
 }
