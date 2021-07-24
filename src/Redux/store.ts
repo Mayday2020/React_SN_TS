@@ -1,7 +1,6 @@
 
-import profileReducer, {addPostCreator, updateNewPostCreator} from "./profile_reducer";
-import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs_reducer";
-import sidebarReducer from "./sidebar_reducer";
+import {addPostCreator, updateNewPostCreator} from "./profile_reducer";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs_reducer";
 import {followAC, setUsersAC, unfollowAC} from "./users_reducer";
 
         //  TYPES
@@ -36,7 +35,25 @@ type LocationUserType = {
     country: string,
     city: string
 }           // Users
-export type UserType = {
+
+export type NewArrayUsersType = {
+    error: string
+    items: NewUserType[]
+    totalCount: number
+}
+export type NewUserType = {
+    id: number
+    name: string
+    status: string
+    photos: {
+        small: string
+        large: string
+    }
+    followed: boolean
+}
+
+
+/*export type UserType = {
     id: number
     photoUrl: string
     followed: boolean
@@ -46,13 +63,13 @@ export type UserType = {
 }
 export type ArrayUsersType = {
     users: UserType[]
-}
+}*/
 
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
     sidebarPage: SidebarType
-    usersPage: ArrayUsersType
+    usersPage: NewArrayUsersType
 }        //  State
 
 export type DispatchPropsType = {
@@ -60,16 +77,6 @@ export type DispatchPropsType = {
     message: string
 }   //  Dispatch
 
-export type StoreType = {
-    _state: RootStateType
-    getState: ()=> RootStateType
-    addPost: ()=> void
-    changeNewText: (newText: string) => void
-    _callSubscriber: (state: RootStateType) => void
-    updateNewPostText: (newText: string) => void
-    subscribe: (observer: ((state: RootStateType)=>void)) => void
-    dispatch:(action: ActionsTypes) => void
-}           //  Store
 
         //  ACTIONS
 
@@ -83,8 +90,18 @@ export type ActionUsers = ReturnType<typeof followAC> |
     ReturnType<typeof setUsersAC>
 
         //  STORE
+export type StoreType = {
+    _state: RootStateType
+    getState: ()=> RootStateType
+    addPost: ()=> void
+    changeNewText: (newText: string) => void
+    _callSubscriber: (state: RootStateType) => void
+    updateNewPostText: (newText: string) => void
+    subscribe: (observer: ((state: RootStateType)=>void)) => void
+    dispatch:(action: ActionsTypes) => void
+}           //  Store
 
-export const store: StoreType = {
+/*export const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -149,18 +166,14 @@ export const store: StoreType = {
         this._callSubscriber = observer;
         console.log('subscribe')
     },
-    dispatch(action){  /*  action = {}  */
+    dispatch(action){  /!*  action = {}  *!/
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebarPage = sidebarReducer(this._state.sidebarPage, action)
 
         this._callSubscriber(this._state);
     }
-}
+}*/
 
-
-
-
-
-export default store;
+/*export default store;*/
 /*window.store = store;*/
