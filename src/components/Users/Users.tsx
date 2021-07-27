@@ -9,21 +9,22 @@ type UsersPropsType = {
     unfollow: (userId: number) => void
     setUsers: (users: NewUserType[]) => void
 }
-const Users = (props: UsersPropsType) => {
-    let getUsers = () => {
-        if (props.items.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                props.setUsers(response.data.items)
-            });
-        }
+
+class Users extends React.Component<any, any>{
+    constructor(props: UsersPropsType) {
+        super(props)
+        alert('NEW')
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            this.props.setUsers(response.data.items)
+        });
     }
-    return (
-        <div>
+    render() {
+        return <div>
             <div className={s.content_image}>Users Image</div>
-            <button onClick={getUsers}>Get users</button>
+            {/*<button onClick={this.getUsers}>Get users</button>*/}
             <div className={s.wrapper}>
-                {
-                    props.items.map(u => {
+                {//@ts-ignore
+                    this.props.items.map(u  => {
                         return <div key={u.id} className={s.user}>
                             <div>
                                 {u.photos.small !== null ? u.photos.small : <div className={s.avatar}>AVA</div>}
@@ -31,10 +32,10 @@ const Users = (props: UsersPropsType) => {
                                     {
                                         u.followed
                                             ? <button onClick={() => {
-                                                props.unfollow(u.id)
+                                                this.props.unfollow(u.id)
                                             }}>Follow</button>
                                             : <button onClick={() => {
-                                                props.follow(u.id)
+                                                this.props.follow(u.id)
                                             }}>Unfollow</button>
                                     }
                                 </div>
@@ -54,7 +55,7 @@ const Users = (props: UsersPropsType) => {
                 }
             </div>
         </div>
-    )
+    }
 }
 
 export default Users

@@ -27,7 +27,7 @@ const usersReducer = (state: NewArrayUsersType = initialState, action: ActionUse
                 })}
         }
         case SET_USERS : {
-            return {...state, items: [...state.items, ...action.items]}
+            return {...state, items: [...action.items]}
         }
         default : return state
     }
