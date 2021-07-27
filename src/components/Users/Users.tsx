@@ -3,27 +3,30 @@ import {NewUserType} from "../../Redux/store";
 import s from './Users.module.css'
 import axios from "axios";
 
-type UsersPropsType = {
+type mapStatePropsType = {
     items: NewUserType[]
+}
+type mapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: NewUserType[]) => void
 }
+type UsersPropsType = mapStatePropsType & mapDispatchPropsType
 
-class Users extends React.Component<any, any>{
-    constructor(props: UsersPropsType) {
-        super(props)
+class Users extends React.Component<UsersPropsType, any>{
+    componentDidMount() {
         alert('NEW')
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
             this.props.setUsers(response.data.items)
         });
     }
+
     render() {
         return <div>
             <div className={s.content_image}>Users Image</div>
             {/*<button onClick={this.getUsers}>Get users</button>*/}
             <div className={s.wrapper}>
-                {//@ts-ignore
+                {
                     this.props.items.map(u  => {
                         return <div key={u.id} className={s.user}>
                             <div>

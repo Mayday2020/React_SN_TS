@@ -15,7 +15,7 @@ let mapDispatchToProps = (dispatch: any) => {
         setUsers: (items: NewUserType[]) => dispatch(setUsersAC(items))
     }
 }
-//@ts-ignore
+
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
 
 export default UsersContainer
