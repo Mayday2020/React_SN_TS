@@ -1,7 +1,7 @@
 
 import {addPostCreator, updateNewPostCreator} from "./profile_reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs_reducer";
-import {followAC, setUsersAC, unfollowAC} from "./users_reducer";
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "./users_reducer";
 
         //  TYPES
 
@@ -31,15 +31,12 @@ export type ProfilePageType = {
 
 export type SidebarType = {}            //  Sidebar
 
-type LocationUserType = {
-    country: string,
-    city: string
-}           // Users
-
-export type NewArrayUsersType = {
+export type NewArrayUsersType = {       //  Users
     error: string
     items: NewUserType[]
     totalCount: number
+    pageSize: number
+    currentPage: number
 }
 export type NewUserType = {
     id: number
@@ -87,7 +84,9 @@ export type ActionsTypes = ReturnType<typeof addPostCreator> |
 
 export type ActionUsers = ReturnType<typeof followAC> |
     ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setUsersAC>
+    ReturnType<typeof setUsersAC> |
+    ReturnType<typeof setCurrentPageAC> |
+    ReturnType<typeof setTotalUsersCountAC>
 
         //  STORE
 export type StoreType = {

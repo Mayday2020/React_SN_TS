@@ -34,3 +34,16 @@
     align-items: flex-end;
     color: #a7a5a5;
 }
+
+.selectedPage {
+    font-weight: bold;
+    color: #FFF;
+    cursor: pointer;
+}
+.pageNumbers {
+    text-align: center;
+    font-size: 20px;
+}
+.pageNumbers span {
+    cursor: pointer;
+}
