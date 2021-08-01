@@ -1,7 +1,14 @@
 
 import {addPostCreator, updateNewPostCreator} from "./profile_reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs_reducer";
-import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "./users_reducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUsersAC,
+    toogleIsFetchingAC,
+    unfollowAC
+} from "./users_reducer";
 
         //  TYPES
 
@@ -37,6 +44,7 @@ export type NewArrayUsersType = {       //  Users
     totalCount: number
     pageSize: number
     currentPage: number
+    isFetching: boolean
 }
 export type NewUserType = {
     id: number
@@ -86,7 +94,8 @@ export type ActionUsers = ReturnType<typeof followAC> |
     ReturnType<typeof unfollowAC> |
     ReturnType<typeof setUsersAC> |
     ReturnType<typeof setCurrentPageAC> |
-    ReturnType<typeof setTotalUsersCountAC>
+    ReturnType<typeof setTotalUsersCountAC> |
+    ReturnType<typeof toogleIsFetchingAC>
 
         //  STORE
 export type StoreType = {
