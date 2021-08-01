@@ -1,84 +1,64 @@
-import React from 'react'
-import {NewUserType} from "../../Redux/store";
+import React from "react";
 import s from './Users.module.css'
-import axios from "axios";
+import {NewUserType} from "../../Redux/store";
 
-type mapStatePropsType = {
-    items: NewUserType[]
-    pageSize: number
+type UsersProp = {
     totalCount: number
+    pageSize: number
     currentPage: number
+    onPageChanged: (page: number) => void
+    items: NewUserType[]
+    follow: (id: number) => void
+    unfollow: (id: number) => void
 }
-type mapDispatchPropsType = {
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    setUsers: (users: NewUserType[]) => void
-    setCurrentPage: (page: number) =>void
-    setTotalUsersCount: (totalCount: number)=> void
-}
-type UsersPropsType = mapStatePropsType & mapDispatchPropsType
-
-class Users extends React.Component<UsersPropsType, any>{
-    componentDidMount() {
-        //alert('server request')
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount / 100)  // делим на 100 т.к. пользователей 13750шт
-        });
+const Users = (props: UsersProp) => {
+    let pagesCount = Math.ceil(props.totalCount / props.pageSize);
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
     }
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount / 100)  // делим на 100 т.к. пользователей 13750шт
-        });
-    }
-    render() {
-        let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
-        let pages = []
-        for (let i = 1; i <= pagesCount; i ++){
-            pages.push(i);
-        }
-        return <div>
-            <div className={s.content_image}>Users Image</div>
-            <div className={s.pageNumbers}>
-                { pages.map( p => <span className={this.props.currentPage === p ? s.selectedPage : ''}
-                        onClick={()=>{this.onPageChanged(p)}}>{p} </span>)}
-            </div>
-            <div className={s.wrapper}>
-                {
-                    this.props.items.map(u  => {
-                        return <div key={u.id} className={s.user}>
+    return <div>
+        <div className={s.content_image}>Users Image</div>
+        <div className={s.pageNumbers}>
+            {pages.map(p => <span className={props.currentPage === p ? s.selectedPage : ''}
+                                  onClick={() => {
+                                      props.onPageChanged(p)
+                                  }}
+                                  key={p}>{p} </span>)}
+        </div>
+        <div className={s.wrapper}>
+            {
+                props.items.map(u => {
+                    return <div key={u.id} className={s.user}>
+                        <div>
+                            {u.photos.small !== null ? u.photos.small : <div className={s.avatar}>AVA</div>}
                             <div>
-                                {u.photos.small !== null ? u.photos.small : <div className={s.avatar}>AVA</div>}
-                                <div>
-                                    {
-                                        u.followed
-                                            ? <button onClick={() => {
-                                                this.props.unfollow(u.id)
-                                            }}>Follow</button>
-                                            : <button onClick={() => {
-                                                this.props.follow(u.id)
-                                            }}>Unfollow</button>
-                                    }
-                                </div>
-                            </div>
-                            <div className={s.userInfo}>
-                                <div className={s.userInfoLeft}>
-                                    <div>{u.name}</div>
-                                    <div>{u.status}</div>
-                                </div>
-                                <div className={s.userInfoRight}>
-                                    <div>{'city'}</div>
-                                    <div>{'country'}</div>
-                                </div>
+                                {
+                                    u.followed
+                                        ? <button onClick={() => {
+                                            props.unfollow(u.id)
+                                        }}>Follow</button>
+                                        : <button onClick={() => {
+                                            props.follow(u.id)
+                                        }}>Unfollow</button>
+                                }
                             </div>
                         </div>
-                    })
-                }
-            </div>
+                        <div className={s.userInfo}>
+                            <div className={s.userInfoLeft}>
+                                <div>{u.name}</div>
+                                <div>{u.status}</div>
+                            </div>
+                            <div className={s.userInfoRight}>
+                                <div>{'city'}</div>
+                                <div>{'country'}</div>
+                            </div>
+                        </div>
+                    </div>
+                })
+            }
         </div>
-    }
+    </div>
 }
 
 export default Users
