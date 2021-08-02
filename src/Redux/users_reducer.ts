@@ -48,22 +48,22 @@ const usersReducer = (state: NewArrayUsersType = initialState, action: ActionUse
         default : return state
     }
 }
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
     return {type: FOLLOW, userId: userId} as const
 }
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
     return {type: UNFOLLOW, userId: userId} as const
 }
-export const setUsersAC = (items: NewUserType[]) => {
+export const setUsers = (items: NewUserType[]) => {
     return {type: SET_USERS, items: items} as const
 }
-export const setCurrentPageAC = (page: number) => {
+export const setCurrentPage = (page: number) => {
     return {type: SET_CURRENT_PAGE, page} as const
 }
-export const setTotalUsersCountAC = (totalCount: number) => {
+export const setTotalUsersCount = (totalCount: number) => {
     return {type: SET_TOTAL_USERS_COUNT, totalCount} as const
 }
-export const toogleIsFetchingAC = (spin: boolean) => {
+export const toggleIsFetching = (spin: boolean) => {
     return {type: TOGGLE_IS_FETCHING, spin} as const
 }
 export default usersReducer
