@@ -28,6 +28,9 @@
     border-radius: 50%;
     color: #FFF;
 }
+.avatarBlock a{
+    text-decoration: none;
+}
 .userInfo {
     display: flex;
     justify-content: space-between;

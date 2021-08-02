@@ -6,6 +6,13 @@
 .user_image {
     align-self: flex-start;
     background-color: coral;
+    padding: 5px 5px;
+    margin: 10px;
+    border-radius: 20%;
+}
+.user_ava {
+    align-self: flex-start;
+    background-color: coral;
     padding: 15px 10px;
     margin: 10px;
     font-size: 22px;

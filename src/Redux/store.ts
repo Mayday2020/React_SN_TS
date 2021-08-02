@@ -1,5 +1,5 @@
 
-import {addPostCreator, updateNewPostCreator} from "./profile_reducer";
+import {addPostCreator, setUserProfile, updateNewPostCreator} from "./profile_reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs_reducer";
 import {
     follow,
@@ -30,10 +30,33 @@ export type PostType = {
     id: number,
     message: string,
     likesCount: number
-}            //  Profile
+}
+export type ProfileType = {             //  Profile
+    aboutMe: null | string,
+    contacts: {
+        facebook: null | string,
+        website: null | string,
+        vk: null | string,
+        twitter: null | string,
+        instagram: null | string,
+        youtube: null | string,
+        github: null | string,
+        mainLink: null | string
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string | null,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string | null,
+        large: string | null
+    }
+}
+
 export type ProfilePageType = {
     posts: PostType[]
     newPostText: string
+    profile: ProfileType | null
 }
 
 export type SidebarType = {}            //  Sidebar
@@ -88,7 +111,8 @@ export type DispatchPropsType = {
 export type ActionsTypes = ReturnType<typeof addPostCreator> |
     ReturnType<typeof updateNewPostCreator> |
     ReturnType<typeof updateNewMessageBodyCreator> |
-    ReturnType<typeof sendMessageCreator>
+    ReturnType<typeof sendMessageCreator> |
+    ReturnType<typeof setUserProfile>
 
 export type ActionUsers = ReturnType<typeof follow> |
     ReturnType<typeof unfollow> |

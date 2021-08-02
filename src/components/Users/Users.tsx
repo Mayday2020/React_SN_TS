@@ -1,6 +1,7 @@
 import React from "react";
 import s from './Users.module.css'
 import {NewUserType} from "../../Redux/store";
+import {NavLink} from "react-router-dom";
 
 type UsersProp = {
     totalCount: number
@@ -30,8 +31,10 @@ const Users = (props: UsersProp) => {
             {
                 props.items.map(u => {
                     return <div key={u.id} className={s.user}>
-                        <div>
-                            {u.photos.small !== null ? u.photos.small : <div className={s.avatar}>AVA</div>}
+                        <div className={s.avatarBlock}>
+                            <NavLink to={'/profile/' + u.id }>
+                                {u.photos.small !== null ? u.photos.small : <div className={s.avatar}>AVA</div>}
+                            </NavLink>
                             <div>
                                 {
                                     u.followed
