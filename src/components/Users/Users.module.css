@@ -28,6 +28,15 @@
     border-radius: 50%;
     color: #FFF;
 }
+.avatarImage {
+    background-color: coral;
+    width: 40px;
+    padding: 2px;
+    margin: 5px;
+    font-size: 18px;
+    border-radius: 30%;
+    color: #FFF;
+}
 .avatarBlock a{
     text-decoration: none;
 }

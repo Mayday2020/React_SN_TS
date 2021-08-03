@@ -37,7 +37,7 @@ class UsersContainer extends React.Component<UsersPropsType, any> {
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount / 100)  // делим на 100 т.к. пользователей 13750шт
+                this.props.setTotalUsersCount(response.data.totalCount / 50)  // делим на 100 т.к. пользователей 13750шт
             });
     }
 
@@ -48,7 +48,7 @@ class UsersContainer extends React.Component<UsersPropsType, any> {
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount / 100)  // делим на 100 т.к. пользователей 13750шт
+                this.props.setTotalUsersCount(response.data.totalCount / 50)  // делим на 100 т.к. пользователей 13750шт
             });
     }
 

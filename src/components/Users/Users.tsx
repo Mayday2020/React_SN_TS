@@ -32,8 +32,12 @@ const Users = (props: UsersProp) => {
                 props.items.map(u => {
                     return <div key={u.id} className={s.user}>
                         <div className={s.avatarBlock}>
-                            <NavLink to={'/profile/' + u.id }>
-                                {u.photos.small !== null ? u.photos.small : <div className={s.avatar}>AVA</div>}
+                            <NavLink to={'/profile/' + u.id}>
+                                {u.photos.small !== null
+                                    ? <div >
+                                        <img className={s.avatarImage} src={u.photos.small} alt="AVA"/>
+                                    </div>
+                                    : <div className={s.avatar}>AVA</div>}
                             </NavLink>
                             <div>
                                 {
