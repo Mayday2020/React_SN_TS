@@ -7,8 +7,9 @@ const SET_CURRENT_PAGE = "SET-CURRENT-PAGE"
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
 
-let initialState: any = {
+let initialState: NewArrayUsersType = {
     items: [],
+    error: '',
     pageSize: 7,
     totalCount: 0,
     currentPage: 1,
@@ -18,7 +19,7 @@ let initialState: any = {
 const usersReducer = (state: NewArrayUsersType = initialState, action: ActionUsers) => {
     switch (action.type){
         case FOLLOW : {
-            return { ...state, users: state.items.map((u: any) => {
+            return { ...state, items: state.items.map((u) => {
                 if(u.id === action.userId) {
                     return {...u, followed: true}
                 }
@@ -26,7 +27,7 @@ const usersReducer = (state: NewArrayUsersType = initialState, action: ActionUse
                 })}
         }
         case UNFOLLOW :{
-            return { ...state, users: state.items.map((u: any) => {
+            return { ...state, items: state.items.map((u) => {
                     if(u.id === action.userId) {
                         return {...u, followed: false}
                     }

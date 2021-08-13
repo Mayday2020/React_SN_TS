@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
@@ -18,23 +18,6 @@ type MapStatePropsType = {
 }
 type PropsType = MapDispatchPropsType & MapStatePropsType;
 
-/*function ProfileContainer (props: ComponentPropsType){
-    useEffect(()=>{
-        let userId = props.match.params.userId;
-        if(!userId){
-        userId = '2';
-    }
-    props.toggleIsFetching(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-        .then(response => {
-            props.toggleIsFetching(false)
-            props.setUserProfile(response.data)
-        });
-    }, [])
-    return <div>
-        <Profile {...props} profile={props.profile}/>
-    </div>
-}*/
 class ProfileContainer extends React.Component<ComponentPropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId;
