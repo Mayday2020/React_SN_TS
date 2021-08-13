@@ -1,9 +1,19 @@
 .header {
     grid-area: h;
     background-color: azure;
+    display: flex;
+    justify-content: space-between;
 }
 .header_icon span{
     padding: 10px 10px;
     font-size: 30px;
     background-color: coral;
+}
+.loginBlock {
+    padding: 15px;
+    background-color: #599496;
+}
+.loginBlock a {
+    text-decoration: none;
+    color: #FFF;
 }

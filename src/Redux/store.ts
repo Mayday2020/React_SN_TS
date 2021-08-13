@@ -9,6 +9,8 @@ import {
     toggleIsFetching,
     unfollow
 } from "./users_reducer";
+import store from "./redux-store";
+import {setAuthUserData} from "./auth_reducer";
 
         //  TYPES
 
@@ -52,6 +54,16 @@ export type ProfileType = {             //  Profile
         large: string | null
     }
 }
+export type AuthResponseType = {
+    resultCode: number
+    messages: [],
+    data: AuthResponseDataType
+}
+export type AuthResponseDataType = {
+    id: number | null,
+    email: string | null,
+    login: string | null
+}
 
 export type ProfilePageType = {
     posts: PostType[]
@@ -80,19 +92,6 @@ export type NewUserType = {
     followed: boolean
 }
 
-
-/*export type UserType = {
-    id: number
-    photoUrl: string
-    followed: boolean
-    fullName: string
-    status: string
-    location: LocationUserType
-}
-export type ArrayUsersType = {
-    users: UserType[]
-}*/
-
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
@@ -105,14 +104,14 @@ export type DispatchPropsType = {
     message: string
 }   //  Dispatch
 
-
         //  ACTIONS
 
 export type ActionsTypes = ReturnType<typeof addPostCreator> |
     ReturnType<typeof updateNewPostCreator> |
     ReturnType<typeof updateNewMessageBodyCreator> |
     ReturnType<typeof sendMessageCreator> |
-    ReturnType<typeof setUserProfile>
+    ReturnType<typeof setUserProfile> |
+    ReturnType<typeof setAuthUserData>
 
 export type ActionUsers = ReturnType<typeof follow> |
     ReturnType<typeof unfollow> |
@@ -133,79 +132,3 @@ export type StoreType = {
     dispatch:(action: ActionsTypes) => void
 }           //  Store
 
-/*export const store: StoreType = {
-    _state: {
-        profilePage: {
-            posts: [
-                { id: 1, message: "Hi, how are you?", likesCount: 30 },
-                { id: 2, message: "It's my first post.", likesCount: 17 },
-                { id: 3, message: "Please, like this comment))", likesCount: 91 }
-            ],
-            newPostText: 'it-kamasutra.com'
-        },
-        dialogsPage: {
-            dialogs: [
-                {id: 1, name: 'Bob'},
-                {id: 2, name: 'Alex'},
-                {id: 3, name: 'Ashley'},
-                {id: 4, name: 'Victory'},
-                {id: 5, name: 'Helen'}
-            ],
-            messages: [
-                {id: 1, message: 'Is that u, Alex Clare?'},
-                {id: 2, message: 'Boooob?! Do somethink!!!'},
-                {id: 3, message: 'Not of your business'},
-                {id: 4, message: 'Not of your business'},
-                {id: 5, message: 'Not of your business'}
-            ],
-            newMessageBody: ''
-        },
-        sidebarPage: {},
-        usersPage: {
-            users: [
-                {id: 1, photoUrl: '', followed: true, fullName: 'Dmitry', status: 'Learning React', location: {country: 'Russia', city: 'Moscow'}},
-                {id: 2, photoUrl: '', followed: false, fullName: 'Daniel', status: 'Eating...', location: {country: 'Belarus', city: 'Minsk'}},
-                {id: 3, photoUrl: '', followed: true, fullName: 'Vlad', status: 'Sleeping...Zzz...zzz', location: {country: 'Ukrane', city: 'Kiev'}}
-            ]
-        }
-    },
-    getState(){
-      return this._state
-    },
-    addPost(){
-        let newPost: PostType = {
-            id: new Date().getTime(),
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state);
-    },
-    changeNewText(newText){
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-
-    _callSubscriber(state){
-        console.log('State changed')
-    },
-    updateNewPostText(newText){
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-    subscribe(observer){
-        this._callSubscriber = observer;
-        console.log('subscribe')
-    },
-    dispatch(action){  /!*  action = {}  *!/
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
-        this._state.sidebarPage = sidebarReducer(this._state.sidebarPage, action)
-
-        this._callSubscriber(this._state);
-    }
-}*/
-
-/*export default store;*/
-/*window.store = store;*/
