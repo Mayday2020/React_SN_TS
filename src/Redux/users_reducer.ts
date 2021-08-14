@@ -10,7 +10,7 @@ const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
 let initialState: NewArrayUsersType = {
     items: [],
     error: '',
-    pageSize: 7,
+    pageSize: 10,
     totalCount: 0,
     currentPage: 1,
     isFetching: true

@@ -9,9 +9,9 @@ import {
     unfollow
 } from "../../Redux/users_reducer";
 import React, {useEffect} from "react";
-import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
+import {usersAPI} from "../../api/api";
 
 type mapStatePropsType = {
     items: NewUserType[]
@@ -33,23 +33,19 @@ type UsersPropsType = mapStatePropsType & mapDispatchPropsType
 const UsersContainer = (props: UsersPropsType) => {
     useEffect(()=>{
         props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`,
-            {withCredentials: true})
-            .then(response => {
+        usersAPI.getUsers(props.currentPage, props.pageSize).then(data => {
                 props.toggleIsFetching(false)
-                props.setUsers(response.data.items)
-                props.setTotalUsersCount(response.data.totalCount / 50)  // делим на 50 т.к. пользователей 13750шт
+                props.setUsers(data.items)
+                props.setTotalUsersCount(data.totalCount / 60)  // делим на 60 т.к. пользователей 13750шт
             });
     }, [props.setTotalUsersCount, props.setUsers, props.toggleIsFetching, props.toggleIsFetching, props.currentPage, props.pageSize])
     const onPageChanged = (pageNumber: number) => {
         props.setCurrentPage(pageNumber);
         props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`,
-            {withCredentials: true})
-            .then(response => {
+        usersAPI.getUsers(pageNumber, props.pageSize).then(data => {
                 props.toggleIsFetching(false)
-                props.setUsers(response.data.items)
-                props.setTotalUsersCount(response.data.totalCount / 50)  // делим на 100 т.к. пользователей 13750шт
+                props.setUsers(data.items)
+                props.setTotalUsersCount(data.totalCount / 60)  // делим на 60 т.к. пользователей 13750шт
             });
     }
     return <>

@@ -1,11 +1,11 @@
 import React from 'react'
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {setUserProfile} from "../../Redux/profile_reducer";
 import {toggleIsFetching} from "../../Redux/users_reducer";
 import {RootStateType} from "../../Redux/store";
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import {usersAPI} from "../../api/api";
 
 type PathParamsType = {userId: string }
 type ComponentPropsType = RouteComponentProps<PathParamsType> & PropsType
@@ -25,10 +25,10 @@ class ProfileContainer extends React.Component<ComponentPropsType> {
             userId = '2';
         }
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(response => {
+        usersAPI.getUser(userId)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUserProfile(response.data)
+                this.props.setUserProfile(data)
             });
     }
 

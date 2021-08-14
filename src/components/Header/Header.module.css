@@ -12,8 +12,8 @@
 .loginBlock {
     padding: 15px;
     background-color: #599496;
+    color: #ffffff;
 }
 .loginBlock a {
     text-decoration: none;
-    color: #FFF;
 }
