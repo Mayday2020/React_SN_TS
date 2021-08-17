@@ -6,7 +6,7 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleIsFetching,
+    toggleIsFetching, toggleFollowingProgress,
     unfollow
 } from "./users_reducer";
 import store from "./redux-store";
@@ -80,6 +80,7 @@ export type NewArrayUsersType = {       //  Users
     pageSize: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 }
 export type NewUserType = {
     id: number
@@ -118,7 +119,8 @@ export type ActionUsers = ReturnType<typeof follow> |
     ReturnType<typeof setUsers> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
-    ReturnType<typeof toggleIsFetching>
+    ReturnType<typeof toggleIsFetching> |
+    ReturnType<typeof toggleFollowingProgress>
 
         //  STORE
 export type StoreType = {
