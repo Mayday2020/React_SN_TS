@@ -2,12 +2,12 @@
 import {addPostCreator, setUserProfile, updateNewPostCreator} from "./profile_reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs_reducer";
 import {
-    follow,
+    followSuccess,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
     toggleIsFetching, toggleFollowingProgress,
-    unfollow
+    unfollowSuccess
 } from "./users_reducer";
 import store from "./redux-store";
 import {setAuthUserData} from "./auth_reducer";
@@ -114,8 +114,8 @@ export type ActionsTypes = ReturnType<typeof addPostCreator> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setAuthUserData>
 
-export type ActionUsers = ReturnType<typeof follow> |
-    ReturnType<typeof unfollow> |
+export type ActionUsers = ReturnType<typeof followSuccess> |
+    ReturnType<typeof unfollowSuccess> |
     ReturnType<typeof setUsers> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
