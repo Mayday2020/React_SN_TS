@@ -9,6 +9,7 @@ import {
 import React, {useEffect} from "react";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 type mapStatePropsType = {
     items: NewUserType[]
@@ -47,46 +48,6 @@ const UsersContainer = (props: UsersPropsType) => {
                followingInProgress={props.followingInProgress}/>
     </>
 }
-
-/*class UsersContainer extends React.Component<UsersPropsType> {
-    componentDidMount() {
-        this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-            {withCredentials: true})
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount / 50)  // делим на 50 т.к. пользователей 13750шт
-            });
-    }
-
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
-            {withCredentials: true})
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount / 50)  // делим на 100 т.к. пользователей 13750шт
-            });
-    }
-
-    render() {
-
-        return <>
-            {this.props.isFetching ? <Preloader /> : null}
-            <Users totalCount={this.props.totalCount}
-                   pageSize={this.props.pageSize}
-                   currentPage={this.props.currentPage}
-                   onPageChanged={this.onPageChanged}
-                   items={this.props.items}
-                   follow={this.props.follow}
-                   unfollow={this.props.unfollow}/>
-        </>
-    }
-}*/
-
 let mapStateToProps = (state: RootStateType) => {
     return {
         items: state.usersPage.items,
@@ -97,10 +58,9 @@ let mapStateToProps = (state: RootStateType) => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
-
-export default connect(mapStateToProps, {
+export default withAuthRedirect(connect(mapStateToProps, {
     follow,
     unfollow,
     setCurrentPage,
     getUsers
-})(UsersContainer)
+})(UsersContainer))

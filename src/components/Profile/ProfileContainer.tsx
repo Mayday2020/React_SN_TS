@@ -5,6 +5,7 @@ import {getUserProfile} from "../../Redux/profile_reducer";
 import {toggleIsFetching} from "../../Redux/users_reducer";
 import {ActionUsers, ProfileType, RootStateType} from "../../Redux/store";
 import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import withAuthRedirect from '../../hoc/withAuthRedirect';
 
 type PathParamsType = {userId: string }
 type ComponentPropsType = RouteComponentProps<PathParamsType> & PropsType
@@ -25,15 +26,16 @@ export const ProfileContainer = (props: ComponentPropsType) => {
     }
     props.getUserProfile(userId)
 
-    if (!props.isAuth) return <Redirect to={'/login'}/>
     return <div>
         <Profile profile={props.profile}/>
     </div>
 }
+
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
 let mapStateToProps = (state: RootStateType) => ({
-    profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
+    profile: state.profilePage.profile
 })
-let WithUrlDataContainerComponent = withRouter(ProfileContainer)
-//@ts-ignore
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
+
 export default connect(mapStateToProps, {getUserProfile, toggleIsFetching})(WithUrlDataContainerComponent);
