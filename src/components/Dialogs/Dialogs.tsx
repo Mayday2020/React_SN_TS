@@ -3,14 +3,16 @@ import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message  from "./Message/Message";
 import {DialogItemType, MessageType} from "../../Redux/store";
+import { Redirect } from "react-router-dom";
 
 type DialogsPropsType = {
     dialogsPage: {
         dialogs: DialogItemType[],
         messages: MessageType[]
         newMessageBody: string
-    },
-    updateNewMessageBody: (text: string)=> void,
+    }
+    isAuth: boolean
+    updateNewMessageBody: (text: string)=> void
     sendMessage: (textMessage: string)=> void
 }
 
@@ -26,6 +28,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props: DialogsPropsType) => {
         let body = e.target.value;
         props.updateNewMessageBody(body)
     }
+    if (!props.isAuth) return <Redirect to={'/login'}/>
     return (
         <main>
             <div className={s.content_image}>Dialogs Image</div>

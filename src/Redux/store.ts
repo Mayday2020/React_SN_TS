@@ -9,7 +9,6 @@ import {
     toggleIsFetching, toggleFollowingProgress,
     unfollowSuccess
 } from "./users_reducer";
-import store from "./redux-store";
 import {setAuthUserData} from "./auth_reducer";
 
         //  TYPES
@@ -54,10 +53,10 @@ export type ProfileType = {             //  Profile
         large: string | null
     }
 }
+
 export type AuthResponseType = {
-    resultCode: number
-    messages: [],
     data: AuthResponseDataType
+    isAuth: boolean
 }
 export type AuthResponseDataType = {
     id: number | null,
@@ -98,6 +97,7 @@ export type RootStateType = {
     dialogsPage: DialogPageType
     sidebarPage: SidebarType
     usersPage: NewArrayUsersType
+    auth: AuthResponseType
 }        //  State
 
 export type DispatchPropsType = {

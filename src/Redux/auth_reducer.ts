@@ -3,11 +3,11 @@ import {authAPI} from "../api/api";
 
 const SET_USER_DATA = "SET-USER-DATA";
 
-type InitialStateType = {
+export type AuthStateType = {
     data: AuthResponseDataType
     isAuth: boolean
 }
-let initialState: InitialStateType = {
+let initialState: AuthStateType = {
     data: {
         id: null,
         email: null,
@@ -16,7 +16,7 @@ let initialState: InitialStateType = {
     isAuth: false
 }
 
-const authReducer = (state: InitialStateType = initialState, action: ActionsTypes) => {
+const authReducer = (state: AuthStateType = initialState, action: ActionsTypes) => {
     switch (action.type){
         case SET_USER_DATA :
             return {
