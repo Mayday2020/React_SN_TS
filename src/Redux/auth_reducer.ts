@@ -1,6 +1,5 @@
-import {ActionsTypes, ActionUsers, AuthResponseDataType} from "./store";
-import {usersAPI} from "../api/api";
-import axios from "axios";
+import {ActionsTypes, AuthResponseDataType} from "./store";
+import {authAPI} from "../api/api";
 
 const SET_USER_DATA = "SET-USER-DATA";
 
@@ -31,9 +30,8 @@ const authReducer = (state: InitialStateType = initialState, action: ActionsType
 export const setAuthUserData = (userId: number, email: string, login: string) => {
     return {type: SET_USER_DATA, data: {userId, email, login}} as const
 }
-/*export const authMe = () => {
-    return (dispatch: (AC: ActionsTypes) => void) => {
-        usersAPI.authMe()
+export const getAuthUserData = () => (dispatch: (AC: ActionsTypes) => void) => {
+        authAPI.me()
             .then(response => {
                 if (response.data.resultCode === 0){
                     let {id, email, login} = response.data.data;
@@ -41,6 +39,5 @@ export const setAuthUserData = (userId: number, email: string, login: string) =>
                 }
             });
     }
-}*/
 
 export default authReducer
