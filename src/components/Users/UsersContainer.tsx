@@ -59,8 +59,7 @@ let mapStateToProps = (state: RootStateType) => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
-export default compose(
-    withAuthRedirect,
+export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         follow,
         unfollow,

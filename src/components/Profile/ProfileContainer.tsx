@@ -35,8 +35,8 @@ export const ProfileContainer = (props: ComponentPropsType) => {
 let mapStateToProps = (state: RootStateType) => ({
     profile: state.profilePage.profile
 })
-export default compose(
-    withAuthRedirect,
-    withRouter,
-    connect(mapStateToProps, {getUserProfile, toggleIsFetching})
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getUserProfile, toggleIsFetching}),
+    withRouter/*,
+    withAuthRedirect*/
 )(ProfileContainer)
