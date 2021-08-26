@@ -10,6 +10,7 @@ import React, {useEffect} from "react";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type mapStatePropsType = {
     items: NewUserType[]
@@ -58,9 +59,12 @@ let mapStateToProps = (state: RootStateType) => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
-export default withAuthRedirect(connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setCurrentPage,
-    getUsers
-})(UsersContainer))
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        setCurrentPage,
+        getUsers
+    }
+))(UsersContainer)

@@ -4,8 +4,9 @@ import {connect} from "react-redux";
 import {getUserProfile} from "../../Redux/profile_reducer";
 import {toggleIsFetching} from "../../Redux/users_reducer";
 import {ActionUsers, ProfileType, RootStateType} from "../../Redux/store";
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import withAuthRedirect from '../../hoc/withAuthRedirect';
+import {compose} from "redux";
 
 type PathParamsType = {userId: string }
 type ComponentPropsType = RouteComponentProps<PathParamsType> & PropsType
@@ -31,11 +32,11 @@ export const ProfileContainer = (props: ComponentPropsType) => {
     </div>
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-
 let mapStateToProps = (state: RootStateType) => ({
     profile: state.profilePage.profile
 })
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
-
-export default connect(mapStateToProps, {getUserProfile, toggleIsFetching})(WithUrlDataContainerComponent);
+export default compose(
+    withAuthRedirect,
+    withRouter,
+    connect(mapStateToProps, {getUserProfile, toggleIsFetching})
+)(ProfileContainer)
