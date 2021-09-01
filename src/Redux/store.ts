@@ -1,5 +1,5 @@
 
-import {addPostCreator, setUserProfile, updateNewPostCreator} from "./profile_reducer";
+import {addPostCreator, setStatus, setUserProfile, updateNewPostCreator} from "./profile_reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs_reducer";
 import {
     followSuccess,
@@ -66,6 +66,7 @@ export type AuthResponseDataType = {
 
 export type ProfilePageType = {
     posts: PostType[]
+    status: string
     newPostText: string
     profile: ProfileType | null
 }
@@ -112,7 +113,8 @@ export type ActionsTypes = ReturnType<typeof addPostCreator> |
     ReturnType<typeof updateNewMessageBodyCreator> |
     ReturnType<typeof sendMessageCreator> |
     ReturnType<typeof setUserProfile> |
-    ReturnType<typeof setAuthUserData>
+    ReturnType<typeof setAuthUserData> |
+    ReturnType<typeof setStatus>
 
 export type ActionUsers = ReturnType<typeof followSuccess> |
     ReturnType<typeof unfollowSuccess> |

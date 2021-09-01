@@ -3,8 +3,11 @@ import s from './ProfileInfo.module.css';
 import {ProfileType} from "../../../Redux/store";
 import Preloader from "../../common/preloader/Preloader";
 import ProfileStatus from './ProfileStatus'
+import {Dispatch} from "redux";
 type ProfileInfoType = {
     profile: ProfileType
+    status: string
+    updateStatus: (status: string) => (dispatch: Dispatch) => void
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {
@@ -13,7 +16,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
     }
     return (
         <div>
-            <ProfileStatus status={'Hello my friends'}/>
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             <div className={s.profileInfo}>
                 { props.profile.photos.small
                     ? <img className={s.user_image} alt={'ava'} src={props.profile.photos.small}/>

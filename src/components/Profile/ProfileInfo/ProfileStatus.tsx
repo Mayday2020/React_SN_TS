@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
+import {Dispatch} from "redux";
 
 type StatusPropsType = {
     status: string
+    updateStatus: (status: string) => (dispatch: Dispatch) => void
 }
 class ProfileStatus extends React.Component<StatusPropsType> {
+
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
     activateEditMode = () => {
         this.setState(
@@ -13,23 +17,30 @@ class ProfileStatus extends React.Component<StatusPropsType> {
         )
     }
     deactivateEditMode = () => {
+        this.props.updateStatus(this.state.status)
         this.setState(
             {editMode: false}
         )
+    }
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.target.value
+        })
     }
     render() {
        return(
             <div>
                 {!this.state.editMode
                 ? <div>
-                        <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                        <span onDoubleClick={this.activateEditMode}>{this.state.status || this.props.status}</span>
                     </div>
                 : <div>
-                        <input autoFocus onBlur={this.deactivateEditMode} value={this.props.status}/>
+                        <input autoFocus
+                               onBlur={this.deactivateEditMode}
+                               value={this.state.status}
+                        onChange={this.onStatusChange}/>
                     </div>
                 }
-
-
             </div>
         )
     }
